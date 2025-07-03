@@ -3,7 +3,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
@@ -12,10 +11,13 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 # 1.Load and prepare a dataset for binary classification.
 #a1. Load and Prepare Dataset
-data = load_breast_cancer()
-X = data.data
-y = data.target
-feature_names = data.feature_names
+ 
+# Load your dataset
+df = pd.read_csv("your_dataset.csv")  # Replace with your actual file name
+
+# Example: Suppose your dataset has columns: 'feature1', 'feature2', ..., 'target'
+X = df.drop('target', axis=1)  # All columns except target
+y = df['target']  # Binary target column
 
 # Standardize the data
 scaler = StandardScaler()
