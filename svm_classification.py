@@ -14,10 +14,15 @@ from sklearn.metrics import classification_report, confusion_matrix
  
 # Load your dataset
 df = pd.read_csv("breast-cancer.csv")  # Replace with your actual file name
+print(df.head())
+# Drop 'id' and 'diagnosis' to get features only
+X = df.drop(['id', 'diagnosis'], axis=1)
 
-# Example: Suppose your dataset has columns: 'feature1', 'feature2', ..., 'target'
-X = df.drop('target', axis=1)  # All columns except target
-y = df['target']  # Binary target column
+# Use 'diagnosis' as the target
+y = df['diagnosis']
+y = y.map({'M': 1, 'B': 0})  # Convert 'M'/'B' to 1/0
+
+
 
 # Standardize the data
 scaler = StandardScaler()
